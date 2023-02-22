@@ -1,11 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import Pages from './pages';
+
 const App = () => {
   return (
     <div>
-      <h1>Hi Notedly!</h1>
-      <p>Welcome to the Notedly application</p>
+      <Pages />
     </div>
   );
 };
