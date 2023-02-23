@@ -1,6 +1,27 @@
 import React, { useEffect } from 'react';
+import { useQuery, gql } from '@apollo/client';
 
-import Button from '../components/Button';
+import NoteFeed from '../components/NoteFeed';
+
+const GET_NOTES = gql`
+  query noteFeed($cursor: String) {
+    noteFeed(cursor: $cursor) {
+      cursor
+      hasNextPage
+      notes {
+        id
+        createdAt
+        content
+        favoriteCount
+        author {
+          username
+          id
+          avatar
+        }
+      }
+    }
+  }
+`;
 
 const Home = () => {
   useEffect(() => {
@@ -8,12 +29,15 @@ const Home = () => {
     document.title = 'Notedly';
   });
 
-  return (
-    <div>
-      <p>This is the home page</p>
-      <Button>Click me</Button>
-    </div>
-  );
+  //query hook
+  const { data, loading, error, fetchMore } = useQuery(GET_NOTES);
+
+  // if the data is loading, display a loading message
+  if (loading) return <p>Loading...</p>;
+  // if there is an error fetching the data, display an error message
+  if (error) return <p>Error!</p>;
+
+  return <NoteFeed notes={data.noteFeed.notes} />;
 };
 
 export default Home;
