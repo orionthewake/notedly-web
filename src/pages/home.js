@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 
 import NoteFeed from '../components/NoteFeed';
+import Button from '../components/Button';
 
 const GET_NOTES = gql`
   query noteFeed($cursor: String) {
@@ -37,7 +38,40 @@ const Home = () => {
   // if there is an error fetching the data, display an error message
   if (error) return <p>Error!</p>;
 
-  return <NoteFeed notes={data.noteFeed.notes} />;
+  return (
+    <React.Fragment>
+      <NoteFeed notes={data.noteFeed.notes} />
+      {/* Only display the Load More button if hasNextPage is true */}
+      {data.noteFeed.hasNextPage && (
+        // onClick peform a query, passing the current cursor as a variable
+        <Button
+          onClick={() =>
+            fetchMore({
+              variables: {
+                cursor: data.noteFeed.cursor,
+              },
+              updateQuery: (previousResult, { fetchMoreResult }) => {
+                return {
+                  noteFeed: {
+                    cursor: fetchMoreResult.noteFeed.cursor,
+                    hasNextPage: fetchMoreResult.noteFeed.hasNextPage,
+                    // combine the new results and the old
+                    notes: [
+                      ...previousResult.noteFeed.notes,
+                      ...fetchMoreResult.noteFeed.notes,
+                    ],
+                    __typename: 'noteFeed',
+                  },
+                };
+              },
+            })
+          }
+        >
+          Load more
+        </Button>
+      )}
+    </React.Fragment>
+  );
 };
 
 export default Home;
