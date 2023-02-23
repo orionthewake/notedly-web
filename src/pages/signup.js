@@ -43,10 +43,14 @@ const SignUp = props => {
     document.title = 'Sign Up - Notedly';
   });
 
+  const client = useApolloClient();
+
   const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
     onCompleted: data => {
       // store the token
       localStorage.setItem('token', data.signUp);
+      // update the local cache
+      client.writeData({ data: { isLoggedIn: true } });
       // redirect the user to the homepage
       props.history.push('/');
     },
