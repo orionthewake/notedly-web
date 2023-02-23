@@ -45,8 +45,7 @@ const SignUp = props => {
 
   const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
     onCompleted: data => {
-      // console.log the JSON Web Token when the mutation is complete
-      console.log(data.signUp);
+      localStorage.setItem('token', data.signUp);
     },
   });
 
