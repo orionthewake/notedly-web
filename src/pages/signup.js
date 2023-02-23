@@ -45,7 +45,10 @@ const SignUp = props => {
 
   const [signUp, { loading, error }] = useMutation(SIGNUP_USER, {
     onCompleted: data => {
+      // store the token
       localStorage.setItem('token', data.signUp);
+      // redirect the user to the homepage
+      props.history.push('/');
     },
   });
 
