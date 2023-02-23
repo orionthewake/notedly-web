@@ -24,7 +24,12 @@ const SignIn = props => {
       // update the local cache
       client.writeData({ data: { isLoggedIn: true } });
       // redirect the user to the homepage
-      props.history.push('/');
+      console.log(props);
+      props.history.push(
+        props.location.state.from.pathname
+          ? props.location.state.from.pathname
+          : '/'
+      );
     },
     onError: error => {
       console.log(error);
