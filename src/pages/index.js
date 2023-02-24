@@ -11,11 +11,7 @@ import SignUp from './signup';
 import SignIn from './signin';
 import NewNote from './new';
 
-const IS_LOGGED_IN = gql`
-  {
-    isLoggedIn @client
-  }
-`;
+import { IS_LOGGED_IN } from '../gql/query';
 
 const Pages = () => {
   return (
