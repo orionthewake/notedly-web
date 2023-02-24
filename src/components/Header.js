@@ -44,12 +44,12 @@ const Header = props => {
         {data.isLoggedIn ? (
           <ButtonAsLink
             onClick={() => {
-              // remove the token
-              localStorage.removeItem('token');
-              // clear the application cache
-              client.resetStore();
               // update the local state
               client.writeData({ data: { isLoggedIn: false } });
+              // clear the application cache
+              client.resetStore();
+              // remove the token
+              localStorage.removeItem('token');
               // redirect the user to the home page
               props.history.push('/');
             }}
