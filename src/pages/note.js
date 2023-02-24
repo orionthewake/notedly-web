@@ -1,5 +1,5 @@
 import React from 'react';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import Note from '../components/Note';
 import { GET_NOTE } from '../gql/query';

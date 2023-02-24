@@ -1,6 +1,6 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Redirect } from 'react-router-dom';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 
 import Layout from '../components/Layout';
 import Home from './home';

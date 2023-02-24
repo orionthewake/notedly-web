@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useQuery, gql } from '@apollo/client';
+import { useQuery } from '@apollo/client';
 import { Link, withRouter } from 'react-router-dom';
 
 import logo from '../img/logo.svg';
