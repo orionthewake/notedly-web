@@ -44,6 +44,15 @@ const DELETE_NOTE = gql`
   }
 `;
 
+const TOGGLE_FAVORITE = gql`
+  mutation toggleFavorite($id: ID!) {
+    toggleFavorite(id: $id) {
+      id
+      favoriteCount
+    }
+  }
+`;
+
 const SIGNUP_USER = gql`
   mutation signUp($email: String!, $username: String!, $password: String!) {
     signUp(email: $email, username: $username, password: $password)
@@ -56,4 +65,11 @@ const SIGNIN_USER = gql`
   }
 `;
 
-export { NEW_NOTE, EDIT_NOTE, DELETE_NOTE, SIGNUP_USER, SIGNIN_USER };
+export {
+  NEW_NOTE,
+  EDIT_NOTE,
+  DELETE_NOTE,
+  TOGGLE_FAVORITE,
+  SIGNUP_USER,
+  SIGNIN_USER,
+};
