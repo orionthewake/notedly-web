@@ -14,6 +14,7 @@ import Pages from '/pages';
 // configure API URI & cache
 const uri = process.env.API_URI;
 const httpLink = createHttpLink({ uri });
+console.log('httpLink', httpLink);
 const cache = new InMemoryCache();
 
 // check for a token and return the headers to the context
